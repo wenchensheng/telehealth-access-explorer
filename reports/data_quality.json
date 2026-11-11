@@ -1,0 +1,74 @@
+[
+  {
+    "check": "schema",
+    "passed": true,
+    "severity": "ok",
+    "detail": "13 columns: ['Year', 'quarter', 'Bene_Geo_Desc', 'Bene_Mdcd_Mdcr_Enrl_Stus', 'Bene_Race_Desc', 'Bene_Sex_Desc', 'Bene_Mdcr_Entlmt_Stus', 'Bene_Age_Desc', 'Bene_RUCA_Desc', 'Total_Bene_TH_Elig', 'Total_PartB_Enrl', 'Total_Bene_Telehealth', 'Pct_Telehealth']"
+  },
+  {
+    "check": "geographies",
+    "passed": true,
+    "severity": "ok",
+    "detail": "56 geographies (50 states + DC, PR, VI, other territories, National, Missing Data); unexpected=[] absent=[]"
+  },
+  {
+    "check": "unique key",
+    "passed": true,
+    "severity": "ok",
+    "detail": "0 duplicate rows on ['Year', 'quarter', 'Bene_Geo_Desc', 'Bene_RUCA_Desc', 'Bene_Age_Desc', 'Bene_Race_Desc', 'Bene_Mdcd_Mdcr_Enrl_Stus', 'Bene_Sex_Desc', 'Bene_Mdcr_Entlmt_Stus']"
+  },
+  {
+    "check": "period coverage",
+    "passed": true,
+    "severity": "ok",
+    "detail": "each geography has [31] distinct periods (2020-2026, quarters 1-4 plus annual 'Overall')"
+  },
+  {
+    "check": "suppressed cells",
+    "passed": true,
+    "severity": "ok",
+    "detail": "4,026 of 37,324 rows have no rate (suppressed or not applicable). Mostly 'Unknown' rural/urban and 'Other/Unknown' race: {'Other/Unknown': 1953, 'Unknown': 1860, 'American Indian/Alaska Native': 88, 'Rural': 62, 'Urban': 31, 'All': 31, 'Asian/Pacific Islander': 1}"
+  },
+  {
+    "check": "rate within 0-1",
+    "passed": true,
+    "severity": "ok",
+    "detail": "min=0.0000 max=0.8202"
+  },
+  {
+    "check": "users <= eligible",
+    "passed": true,
+    "severity": "ok",
+    "detail": "0 rows where telehealth users exceed eligible users"
+  },
+  {
+    "check": "rate = users / eligible",
+    "passed": true,
+    "severity": "ok",
+    "detail": "max absolute difference 0.000050 (CMS rounds to 4 decimals)"
+  },
+  {
+    "check": "states sum to national",
+    "passed": true,
+    "severity": "ok",
+    "detail": "sum of geographies / national eligible users ranges 0.9998-1.0000"
+  },
+  {
+    "check": "eligible-user jumps >20% q/q",
+    "passed": false,
+    "severity": "warning",
+    "detail": "1 state-quarters: ['Vermont 2026-Q1 (+27%)']. Kept as published; treat with care."
+  },
+  {
+    "check": "tidy key unique",
+    "passed": true,
+    "severity": "ok",
+    "detail": "33,976 tidy rows, 56 geographies, 31 periods"
+  },
+  {
+    "check": "cross-tab rows excluded",
+    "passed": true,
+    "severity": "ok",
+    "detail": "3,348 national-only rows that cross two characteristics (e.g. dual status x age) are not used, because states are only published one characteristic at a time"
+  }
+]

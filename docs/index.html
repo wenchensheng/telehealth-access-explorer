@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Telehealth Access Explorer · Medicare telehealth by state</title>
+  <meta name="description" content="Tap a state to see how many Medicare beneficiaries use telehealth, rural vs urban, by age and equity group. Public CMS data, 2020 to 2026.">
+  <meta name="theme-color" content="#0b3c49">
+  <meta name="color-scheme" content="light">
+  <!-- Installable PWA: Android/Chrome use the manifest; iOS Safari uses the apple-* tags -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Telehealth">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta property="og:title" content="Telehealth Access Explorer">
+  <meta property="og:description" content="Medicare telehealth use by state, rural vs urban, age and equity groups. CMS public data.">
+  <meta property="og:image" content="icons/icon-512.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="icons/icon-192.png" alt="" width="32" height="32">
+      <div>
+        <h1>Telehealth Access Explorer</h1>
+        <p class="sub">Medicare fee-for-service · CMS public data</p>
+      </div>
+    </div>
+    <div class="qpicker" role="group" aria-label="Quarter">
+      <button class="qstep" id="qPrev" aria-label="Previous quarter">&#8249;</button>
+      <select id="quarter" aria-label="Select quarter"></select>
+      <button class="qstep" id="qNext" aria-label="Next quarter">&#8250;</button>
+    </div>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <section id="view-map" class="view" data-tab="map">
+      <div id="installHint" class="hint" hidden>
+        <span>Install: tap <b>Share</b> then <b>Add to Home Screen</b>.</span>
+        <button class="link" id="hintClose" aria-label="Dismiss">✕</button>
+      </div>
+      <div class="card map-card">
+        <div class="card-head">
+          <h2>Share of eligible users with a telehealth visit</h2>
+          <p class="muted" id="mapCaption"></p>
+        </div>
+        <div id="map" class="map" role="img" aria-label="US map of telehealth use by state"></div>
+        <div id="legend" class="legend"></div>
+        <p class="muted small center">Tap a state, or pick one from the ranking below.</p>
+      </div>
+      <div class="card">
+        <div class="card-head row">
+          <h2>State ranking</h2>
+          <button class="chip" id="rankOrder" aria-label="Flip ranking order">Highest first</button>
+        </div>
+        <ol id="rankList" class="rank-list"></ol>
+      </div>
+    </section>
+
+    <section id="view-state" class="view" data-tab="state" hidden>
+      <div class="picker-row">
+        <label for="statePick" class="sr">State</label>
+        <select id="statePick" class="big-select"></select>
+      </div>
+      <div id="stateKpis" class="kpis"></div>
+      <div class="card">
+        <div class="card-head"><h2>Trend, 2020 to 2026</h2><p class="muted small" id="trendReadout">Touch the chart to read a quarter.</p></div>
+        <div id="stateTrend" class="chart"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Rural vs urban</h2><p class="muted small">Tick mark = national rate for the same group</p></div>
+        <div id="stateRural" class="bars"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>By age band</h2></div>
+        <div id="stateAge" class="bars"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Equity: dual status and race/ethnicity</h2></div>
+        <div id="stateEquity" class="bars"></div>
+      </div>
+    </section>
+
+    <section id="view-compare" class="view" data-tab="compare" hidden>
+      <div class="compare-pick">
+        <div><span class="dot a"></span><label for="cmpA" class="sr">First</label><select id="cmpA" class="big-select"></select></div>
+        <button id="cmpSwap" class="iconbtn" aria-label="Swap">⇅</button>
+        <div><span class="dot b"></span><label for="cmpB" class="sr">Second</label><select id="cmpB" class="big-select"></select></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Telehealth use over time</h2><p class="muted small" id="cmpReadout">Touch the chart to read a quarter.</p></div>
+        <div id="cmpTrend" class="chart"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Side by side</h2><p class="muted small" id="cmpCaption"></p></div>
+        <table id="cmpTable" class="cmp-table"></table>
+      </div>
+    </section>
+
+    <section id="view-insights" class="view" data-tab="insights" hidden>
+      <div class="card intro">
+        <h2>What this means for a health system</h2>
+        <p class="muted">Five findings computed from the latest CMS release. Every number is recalculated by the pipeline each time the data is refreshed.</p>
+      </div>
+      <div id="insightList"></div>
+    </section>
+
+    <section id="view-about" class="view" data-tab="about" hidden>
+      <div class="card prose">
+        <h2>About this app</h2>
+        <p>A phone-first explorer of <b>Medicare telehealth use</b> by state, rural vs urban, age and equity group, built as a healthcare analytics portfolio project by <a href="https://github.com/wenchensheng" rel="noopener">Chensheng Wen</a>.</p>
+        <h3>Data source</h3>
+        <p>Centers for Medicare &amp; Medicaid Services (CMS), <a id="srcLink" href="https://data.cms.gov/summary-statistics-on-use-and-payments/medicare-medicaid-service-type-reports/medicare-telehealth-trends" rel="noopener">Medicare Telehealth Trends</a>. Public, aggregate data with no patient-level records. Coverage: <span id="coverage"></span>.</p>
+        <h3>Definitions</h3>
+        <dl>
+          <dt>Telehealth-eligible users</dt>
+          <dd>Medicare beneficiaries who received at least one service on the CMS list of covered telehealth services in the period, whether it was delivered in person or virtually.</dd>
+          <dt>Beneficiaries with a telehealth service</dt>
+          <dd>Of those, the people who received at least one of the services by telehealth (video or audio-only).</dd>
+          <dt>Telehealth use rate</dt>
+          <dd>Beneficiaries with a telehealth service ÷ telehealth-eligible users. This is the number on the map.</dd>
+          <dt>Rural / urban</dt>
+          <dd>From the beneficiary's mailing ZIP code using Rural-Urban Commuting Area (RUCA) codes.</dd>
+          <dt>Dual-eligible</dt>
+          <dd>Enrolled in both Medicare and Medicaid at any time in the period, a common proxy for low income.</dd>
+        </dl>
+        <h3>Limitations</h3>
+        <ul>
+          <li><b>Medicare fee-for-service only.</b> Built from Part B claims; Medicare Advantage enrollees' care is not included, so states with high Medicare Advantage enrollment are represented by a smaller share of their beneficiaries.</li>
+          <li>It counts people, not visits: someone with one or twenty telehealth visits counts once.</li>
+          <li>CMS calls the data preliminary; recent quarters can change as late claims arrive.</li>
+          <li>Small groups are suppressed by CMS and show as "n/a". DC has no rural ZIP codes.</li>
+          <li id="dqNote"></li>
+        </ul>
+        <h3>Policy context</h3>
+        <p>Recent legislation extended many Medicare telehealth flexibilities, such as care at home and audio-only visits, through <b>December 31, 2027</b> (<a href="https://telehealth.hhs.gov/providers/telehealth-policy/telehealth-policy-updates" rel="noopener">HHS telehealth policy updates</a>).</p>
+        <h3>How it was built</h3>
+        <p>Python cleans and checks the CMS file, SQLite + SQL compute the rankings and gaps, and this static web app (D3, no server) reads the exported JSON. It works offline after the first visit. Code: <a href="https://github.com/wenchensheng/telehealth-access-explorer" rel="noopener">github.com/wenchensheng/telehealth-access-explorer</a>.</p>
+        <h3>Install on your phone</h3>
+        <p><b>iPhone:</b> open in Safari, tap Share, then <i>Add to Home Screen</i>. <b>Android:</b> open in Chrome, tap ⋮, then <i>Install app</i>.</p>
+        <button id="installBtn" class="primary" hidden>Install app</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="sheetBackdrop" class="backdrop" hidden></div>
+  <aside id="sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+    <div class="grabber" aria-hidden="true"></div>
+    <div class="sheet-head">
+      <h2 id="sheetTitle"></h2>
+      <button class="iconbtn" id="sheetClose" aria-label="Close">✕</button>
+    </div>
+    <div id="sheetBody"></div>
+    <div class="sheet-actions">
+      <button class="primary" id="sheetDetail">Full state detail</button>
+      <button class="secondary" id="sheetCompare">Compare</button>
+    </div>
+  </aside>
+
+  <nav class="tabbar" role="tablist" aria-label="Sections">
+    <button role="tab" data-tab="map" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 2.2 6 2v11.6l-6-2V6.2Z"/></svg><span>Map</span></button>
+    <button role="tab" data-tab="state" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16v2H4zM6 10h3v7H6zm5-4h3v11h-3zm5 7h3v4h-3z"/></svg><span>State</span></button>
+    <button role="tab" data-tab="compare" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4 3 8l4 4V9h7V7H7V4Zm10 8v3h-7v2h7v3l4-4-4-4Z"/></svg><span>Compare</span></button>
+    <button role="tab" data-tab="insights" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Zm-3 17h6v1.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 20.5V19Z"/></svg><span>Insights</span></button>
+    <button role="tab" data-tab="about" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z"/></svg><span>About</span></button>
+  </nav>
+
+  <noscript><p class="card">This app needs JavaScript to draw the map and charts.</p></noscript>
+  <script src="vendor/d3.min.js" defer></script>
+  <script src="vendor/topojson-client.min.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

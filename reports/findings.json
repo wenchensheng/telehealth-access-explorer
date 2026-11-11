@@ -1,0 +1,132 @@
+{
+  "latest_period": "2026-Q1",
+  "same_quarter_2024": "2024-Q1",
+  "findings": [
+    {
+      "id": "plateau",
+      "title": "Telehealth settled at a steady base, it did not disappear",
+      "stat": "12.7%",
+      "stat_label": "of eligible Medicare FFS users, 2026-Q1",
+      "text": "National use peaked at 46.7% in 2020-Q2. Since 2023 it has held between 10.8% and 14.8% a quarter, and was 12.7% in 2026-Q1 (-1.1 pts vs 2024-Q1), about 2.7 million people. The low point since 2020 was 10.8% in 2025-Q4.",
+      "so_what": "Plan virtual capacity as a permanent, steady share of visits rather than a pandemic surge that is still unwinding."
+    },
+    {
+      "id": "geography",
+      "title": "Where a patient lives changes telehealth use by more than 4x",
+      "stat": "4.4x",
+      "stat_label": "California vs Mississippi",
+      "text": "In 2026-Q1, California led at 21.9% and Mississippi was lowest at 5.0%. Only 16 of 51 states (incl. DC) beat the national rate. Highest: California, Massachusetts, District of Columbia, New York, Minnesota. Lowest: Mississippi, Alabama, Iowa, Nebraska, Idaho.",
+      "so_what": "Benchmark virtual share against your own state, not the national average, before setting targets."
+    },
+    {
+      "id": "rural",
+      "title": "Rural patients use telehealth less than urban patients",
+      "stat": "-3.5 pts",
+      "stat_label": "rural vs urban, national",
+      "text": "Nationally 9.9% of rural vs 13.5% of urban eligible users had a telehealth service in 2026-Q1. Rural use was lower in 37 of 50 states with both groups reported (DC has no rural ZIP codes); the widest gap was Minnesota (13.7% rural vs 19.1% urban).",
+      "so_what": "Rural outreach needs more than a video link: audio-only options, broadband help and scheduling support are where the gap can close."
+    },
+    {
+      "id": "age",
+      "title": "Under-65 beneficiaries with disabilities are the heaviest users",
+      "stat": "26.9%",
+      "stat_label": "of under-65 eligible users",
+      "text": "Beneficiaries under 65 (Medicare through disability or ESRD) used telehealth at 26.9%, 2.2x the 65-74 rate (12.1%). Use edges down with age: 11.0% at 75-84 and 10.9% at 85+. By entitlement, Disabled 27.3%, ESRD 19.9%, Aged 11.4%.",
+      "so_what": "Protect virtual access for patients with disabilities and ESRD first; they would feel any policy rollback most."
+    },
+    {
+      "id": "equity",
+      "title": "Dual-eligible (low-income) beneficiaries use telehealth 2.1x as often as Medicare-only",
+      "stat": "2.1x",
+      "stat_label": "dual-eligible vs Medicare-only",
+      "text": "Dual-eligible (Medicare & Medicaid) beneficiaries used telehealth at 22.8% vs 10.9% for Medicare-only, higher in 51 of 51 states. By race/ethnicity, Hispanic beneficiaries were highest at 16.1% and American Indian/Alaska Native lowest at 11.8% (Non-Hispanic White 12.1%).",
+      "so_what": "Track virtual share by payer and demographic group in clinic dashboards; a cut to telehealth falls hardest on dual-eligible patients."
+    }
+  ],
+  "metrics": {
+    "plateau": {
+      "peak_period": "2020-Q2",
+      "peak": 0.4668,
+      "latest": 0.1266,
+      "same_qtr_2024": 0.1376,
+      "retained": 0.271208,
+      "recent_min": 0.1076,
+      "recent_max": 0.1479,
+      "recent_min_period": "2025-Q4",
+      "low_period": "2025-Q4",
+      "low": 0.1076,
+      "users_latest": 2737802.0
+    },
+    "geography": {
+      "top_state": "California",
+      "top": 0.2194,
+      "bottom_state": "Mississippi",
+      "bottom": 0.0503,
+      "ratio": 4.361829,
+      "n_states": 51,
+      "n_above_national": 16,
+      "top5": [
+        "California",
+        "Massachusetts",
+        "District of Columbia",
+        "New York",
+        "Minnesota"
+      ],
+      "bottom5": [
+        "Mississippi",
+        "Alabama",
+        "Iowa",
+        "Nebraska",
+        "Idaho"
+      ]
+    },
+    "rural": {
+      "rural": 0.0992,
+      "urban": 0.1346,
+      "gap": 0.0354,
+      "ratio": 1.356855,
+      "n_states": 50,
+      "n_rural_lower": 37,
+      "largest_gap_state": "Minnesota",
+      "largest_gap": 0.0536,
+      "largest_gap_rural": 0.1373,
+      "largest_gap_urban": 0.1909
+    },
+    "age": {
+      "under65": 0.2689,
+      "a65_74": 0.1206,
+      "a75_84": 0.1099,
+      "a85": 0.1086,
+      "ratio": 2.229685,
+      "disabled": 0.2729,
+      "aged": 0.1141,
+      "esrd": 0.1988
+    },
+    "equity": {
+      "dual": 0.2276,
+      "medicare_only": 0.1094,
+      "ratio": 2.080439,
+      "n_states": 51,
+      "n_dual_higher": 51,
+      "race_high": "Hispanic",
+      "race_high_pct": 0.1606,
+      "race_low": "American Indian/Alaska Native",
+      "race_low_pct": 0.118,
+      "white": 0.1208,
+      "race": {
+        "American Indian/Alaska Native": 0.118,
+        "Asian/Pacific Islander": 0.1449,
+        "Black/African American": 0.1496,
+        "Hispanic": 0.1606,
+        "Non-Hispanic White": 0.1208
+      },
+      "race_change_vs_2024": {
+        "American Indian/Alaska Native": -0.0145,
+        "Asian/Pacific Islander": -0.0402,
+        "Black/African American": -0.0042,
+        "Hispanic": -0.0195,
+        "Non-Hispanic White": -0.0102
+      }
+    }
+  }
+}

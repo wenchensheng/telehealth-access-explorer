@@ -1,0 +1,86 @@
+{
+  "url_path": "/telehealth-access-explorer/",
+  "manifest": {
+    "name": "Telehealth Access Explorer",
+    "display": "standalone",
+    "start_url": "./?source=pwa",
+    "scope": "./",
+    "icons": [
+      "192x192",
+      "512x512",
+      "512x512"
+    ],
+    "icons_load": true
+  },
+  "ios_meta": {
+    "manifest": "manifest.json",
+    "apple": "icons/apple-touch-icon.png",
+    "capable": "yes",
+    "viewport": "width=device-width, initial-scale=1, viewport-fit=cover"
+  },
+  "apple_touch_icon_loads": true,
+  "service_worker": {
+    "registered": true,
+    "scope": "http://127.0.0.1:48961/telehealth-access-explorer/",
+    "controlling": true,
+    "cached": 14
+  },
+  "map_states_drawn": 51,
+  "map_states_colored": 51,
+  "tap_state_opens_sheet": "Texas",
+  "sheet_to_state_detail": {
+    "hash": "#state/TX?q=2026-Q1",
+    "picker": "TX"
+  },
+  "state_bars": 13,
+  "chart_touch_readout": "2021 Q1 \u00b7 Texas 28.1% \u00b7 US 26.9%",
+  "quarter_selector_recolors_map": {
+    "before": "rgb(8, 29, 88)",
+    "after_2020_Q2": "rgb(35, 140, 188)",
+    "changed": true,
+    "caption": "2020 Q2 \u00b7 darker = higher use \u00b7 national 46.7%"
+  },
+  "compare_rows": 10,
+  "insight_cards": 5,
+  "tabs_rendered": [
+    [
+      "map",
+      true
+    ],
+    [
+      "state",
+      true
+    ],
+    [
+      "compare",
+      true
+    ],
+    [
+      "insights",
+      true
+    ],
+    [
+      "about",
+      true
+    ]
+  ],
+  "deep_link": {
+    "tab_visible": true,
+    "quarter": "2024 Q3",
+    "a": "CA",
+    "b": "MS"
+  },
+  "offline_reload": {
+    "map_states": 51,
+    "new_errors": []
+  },
+  "tabbar_button_min_height_px": 64,
+  "js_errors": [],
+  "aborted_requests_ignored": [
+    "requestfailed: http://127.0.0.1:48961/telehealth-access-explorer/icons/icon-192.png (net::ERR_ABORTED)",
+    "requestfailed: http://127.0.0.1:48961/telehealth-access-explorer/icons/icon-512.png (net::ERR_ABORTED)",
+    "requestfailed: http://127.0.0.1:48961/telehealth-access-explorer/icons/icon-maskable-512.png (net::ERR_ABORTED)",
+    "requestfailed: http://127.0.0.1:48961/telehealth-access-explorer/icons/apple-touch-icon.png (net::ERR_ABORTED)"
+  ],
+  "passed": true
+}
