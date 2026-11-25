@@ -6,6 +6,15 @@ Built with SQL (SQLite), Python (pandas, Jupyter) and a static D3 web app on Git
 
 ![Phone screens: map, state detail sheet, state detail, compare, insights, about](images/phone_screens.png)
 
+## Results at a glance (latest quarter: 2026 Q1)
+
+- **Telehealth settled at a steady base:** national use peaked at **46.7%** in 2020 Q2 and has held at **10.8–14.8%** per quarter since 2023 — **12.7%** in 2026 Q1, about **2.7 million** beneficiaries
+- **Geography swings use by 4.4×:** California leads at **21.9%**, Mississippi is lowest at **5.0%**; only 16 of 51 states (incl. DC) beat the national rate
+- **Rural patients use it less:** **9.9% rural vs 13.5% urban** nationally, and rural use is lower in 37 of 50 states reporting both groups
+- **Need concentrates in two groups:** dual-eligible beneficiaries use telehealth at **22.8% vs 10.9%** for Medicare-only, and under-65 beneficiaries with disabilities are the heaviest users at **26.9%**
+
+Full analysis in [Key findings](#key-findings-latest-quarter-2026-q1) below and [`reports/findings.md`](reports/findings.md).
+
 ## Open on your phone
 
 <img src="images/qr_live.png" width="160" align="right" alt="QR code for the live app">
@@ -106,5 +115,8 @@ images/                  phone screenshots and QR code
 
 MIT for the code. The CMS data is public U.S. government data. Bundled d3, topojson-client and us-atlas are ISC-licensed (see `docs/vendor/THIRD_PARTY_LICENSES.md`).
 
----
-Built by [Chensheng Wen](https://github.com/wenchensheng), healthcare data and BI analyst · SQL · Python · Tableau
+## About the author
+
+Built by **[Chensheng Wen](https://github.com/wenchensheng)** — Business Intelligence Specialist working in healthcare analytics (Epic Cogito / Clarity / Caboodle), focused on virtual-care analytics, reporting governance and data products that leaders actually open. This project is the public-data companion to that work: same questions a health system asks about telehealth, answered end to end with SQL, Python and a static D3 app.
+
+More projects: [github.com/wenchensheng](https://github.com/wenchensheng) · Companion project: [Hybrid Clinic KPI Dashboard](https://github.com/wenchensheng/hybrid-clinic-kpi-dashboard)
